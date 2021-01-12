@@ -1,4 +1,5 @@
 var readlineSync = require("readline-sync");
+const chalk = require('chalk');
 
 var score=0;
 var highScores=[{
@@ -6,49 +7,51 @@ var highScores=[{
   hscore:3
 }];
 var questions=[{
-    question:"How old I am? ", 
+    question:"1. How old I am? \n:  ", 
     answer: "20"
   },
 
   {
-    question:"My favorite superhero would be? ",
-    answer:"Mom"
+    question:"2. Do I have a sweet tooth? \n:  ",
+    answer:"No"
   },
 
   {
-    question: "Where do I study? ",
-    answer: "Lovely Professional University"
+    question: "3. In which year I was born? \n:  ",
+    answer: "2000"
   },
 
   {
-    question: "Where do I live? ",
+    question: "4. Where do I live? \n:  ",
     answer: "Jalandhar"
   },
 
   {
-    question: "In which year I was born? ",
-    answer: "2000"
+    question: "5. My favorite motorcycle racer would be? \n:  ",
+    answer: "valentino rossi"
   }
 ];
 
 function Welcome(){
   var UserName= readlineSync.question("Enter you name? ");
-  console.log("Welcome "+ UserName + " Get ready to play the quiz!");
+  console.log("Welcome "+ chalk.blue(UserName.toUpperCase()) + ", Get ready to play the quiz!");
+  console.log(chalk.underline("\n How well do you know Mansi? \n"));
 }
 
 function play(question, answer){
   var userAnswer= readlineSync.question(question);
 
   if(userAnswer.toUpperCase()=== answer.toUpperCase()){
-    console.log("Right!");
+    console.log(chalk.black.bgGreen(" Right! "));
     score++;
+    console.log("Current score: ", chalk.green(score));
+    console.log("_____________\n");
   }
   else{
-    console.log("Wrong!");
+    console.log(chalk.white.bgRed(" Wrong! "));
+    console.log("Current score: ", chalk.red(score));
+    console.log("_____________\n");
   }
-
-  console.log("Current score: ", score);
-  console.log("_____________");
 }
 
 function game(){
@@ -59,17 +62,17 @@ function game(){
 }
 
 function showScores(){
-  console.log("YAY! You completed the quiz. Your score is: ",score);
+  console.log(chalk.yellow("YAY! You completed the quiz. Your score is: "),chalk.green(score));
 
   for(var i=0; i<highScores.length; i++){
     var currentScore=highScores[i];
     if(score> currentScore.hscore){
-      console.log("HURRAY! You have beaten the highest score.");
+      console.log(chalk.green("HURRAY! You have beaten the highest score."));
       break;
     }
   }
 
-  console.log("Check out others' scores, if you should be there ping me and I'll update it.");
+  console.log("\nCheck out others' scores, if you should be there ping me and I'll update it.\n");
   highScores.map(score => console.log(score.name, " : ", score.hscore));
 }
 
