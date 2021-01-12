@@ -67,7 +67,7 @@ function showScores(){
   for(var i=0; i<highScores.length; i++){
     var currentScore=highScores[i];
     if(score> currentScore.hscore){
-      console.log(chalk.green("HURRAY! You have beaten the highest score."));
+      console.log(chalk.green("\nHURRAY! You have beaten the highest score."));
       break;
     }
   }
